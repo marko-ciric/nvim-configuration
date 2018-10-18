@@ -87,6 +87,7 @@ Plug 'davidhalter/jedi-vim'
 Plug 'caio/querycommandcomplete.vim'
 Plug 'justinmk/vim-gtfo'
 Plug 'freitass/todo.txt-vim'
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
 call plug#end()
 
