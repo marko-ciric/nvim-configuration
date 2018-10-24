@@ -88,10 +88,33 @@ Plug 'caio/querycommandcomplete.vim'
 Plug 'justinmk/vim-gtfo'
 Plug 'freitass/todo.txt-vim'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'rafi/awesome-vim-colorschemes'
+Plug 'vim-airline/vim-airline-themes'
 
 call plug#end()
 
-colo desert
+let g:NERDTreeIndicatorMapCustom = {
+    \ "Modified"  : "✹",
+    \ "Staged"    : "✚",
+    \ "Untracked" : "✭",
+    \ "Renamed"   : "➜",
+    \ "Unmerged"  : "═",
+    \ "Deleted"   : "✖",
+    \ "Dirty"     : "✗",
+    \ "Clean"     : "✔︎",
+    \ 'Ignored'   : '☒',
+    \ "Unknown"   : "?"
+    \ }
+
+let NERDTreeMinimalUI = 1
+
+let NERDTreeDirArrows = 1
+
+set number
+syntax enable
+colorscheme solarized8 
+set background=dark
 syntax on
 
 let g:fzf_action = {
@@ -131,4 +154,10 @@ let g:fzf_colors =
 let g:fzf_history_dir = '~/.local/share/fzf-history'
 map <C-k> :call fzf#vim#ag(expand('<cword>'))<CR>
 map <C-g> :NERDTreeFind<CR>
+
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#left_alt_sep = '|'
+let g:airline#extensions#tabline#formatter = 'unique_tail'
+let g:airline_theme='solarized'
 
