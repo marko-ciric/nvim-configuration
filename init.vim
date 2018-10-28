@@ -15,12 +15,12 @@ Plug 'bigeagle/molokai'
 Plug 'bling/vim-airline'
 Plug 'hkupty/nvimux'
 Plug 'scrooloose/nerdtree'
-" Plug 'scrooloose/syntastic'
+Plug 'scrooloose/syntastic'
 Plug 'w0rp/ale'
 
 Plug 'vim-scripts/DrawIt'
 Plug 'terryma/vim-multiple-cursors'
-" Plug 'easymotion/vim-easymotion'
+Plug 'easymotion/vim-easymotion'
 Plug 'majutsushi/tagbar'
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 Plug 'embear/vim-localvimrc'
@@ -55,22 +55,22 @@ Plug 'leafgarland/typescript-vim'
 Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
 
-" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-" " Plug 'autozimu/LanguageClient-neovim', {
-" "     \ 'branch': 'next',
-" "     \ 'do': 'bash install.sh',
-" "     \ }
-" " Plug 'prabirshrestha/async.vim'
-" " Plug 'prabirshrestha/vim-lsp'
-" 
-" Plug 'zchee/deoplete-jedi'
-" Plug 'zchee/deoplete-go', { 'do': 'make'}
-" "Plug 'zchee/deoplete-clang'
-" Plug 'tweekmonster/deoplete-clang2'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
+Plug 'prabirshrestha/async.vim'
+" Plug 'prabirshrestha/vim-lsp'
+
+Plug 'zchee/deoplete-jedi'
+Plug 'zchee/deoplete-go', { 'do': 'make'}
+Plug 'zchee/deoplete-clang'
+Plug 'tweekmonster/deoplete-clang2'
 "
 
-" Plug 'roxma/ncm-clang'
-" Plug 'roxma/nvim-completion-manager', {'for': ['python', 'go', 'typescript']}
+Plug 'roxma/ncm-clang'
+Plug 'roxma/nvim-completion-manager', {'for': ['python', 'go', 'typescript']}
 
 Plug 'ncm2/ncm2'
 Plug 'roxma/nvim-yarp'
@@ -79,7 +79,7 @@ Plug 'ncm2/ncm2-path'
 Plug 'ncm2/ncm2-tmux'
 Plug 'ncm2/ncm2-bufword'
 
-" Plug 'Valloric/YouCompleteMe', {'for': ['cpp', 'hpp', 'c', 'h']}
+Plug 'Valloric/YouCompleteMe', {'for': ['cpp', 'hpp', 'c', 'h']}
 Plug 'Shougo/echodoc.vim'
 
 Plug 'davidhalter/jedi-vim'
@@ -154,6 +154,8 @@ let g:fzf_colors =
 let g:fzf_history_dir = '~/.local/share/fzf-history'
 map <C-k> :call fzf#vim#ag(expand('<cword>'))<CR>
 map <C-g> :NERDTreeFind<CR>
+map <leader><C-g> :NERDTree<CR>
+map <leader><C-t> :terminal<CR>
 
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ' '
