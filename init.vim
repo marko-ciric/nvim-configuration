@@ -79,7 +79,7 @@ Plug 'ncm2/ncm2-path'
 Plug 'ncm2/ncm2-tmux'
 Plug 'ncm2/ncm2-bufword'
 
-Plug 'Valloric/YouCompleteMe', {'for': ['cpp', 'hpp', 'c', 'h']}
+Plug 'Valloric/YouCompleteMe', {'for': ['cpp', 'hpp', 'c', 'h', 'js', 'go']}
 Plug 'Shougo/echodoc.vim'
 
 Plug 'davidhalter/jedi-vim'
@@ -91,6 +91,7 @@ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'rafi/awesome-vim-colorschemes'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'ervandew/supertab'
 
 call plug#end()
 
@@ -110,10 +111,11 @@ let g:NERDTreeIndicatorMapCustom = {
 let NERDTreeMinimalUI = 1
 
 let NERDTreeDirArrows = 1
+let NERDTreeShowHidden = 1
 
 set number
 syntax enable
-colorscheme solarized8 
+colorscheme sierra 
 set background=dark
 syntax on
 
@@ -154,12 +156,46 @@ let g:fzf_colors =
 let g:fzf_history_dir = '~/.local/share/fzf-history'
 map <C-k> :call fzf#vim#ag(expand('<cword>'))<CR>
 map <C-g> :NERDTreeFind<CR>
-map <leader><C-g> :NERDTree<CR>
+map <leader><C-g> :NERDTreeToggle<CR>
+map <leader><C-w> :NERDTreeCWD<CR>
 map <leader><C-t> :terminal<CR>
+map <leader><C-f> :ALEFix<CR>
+map <leader><C-n> :tabnew<CR>
+inoremap <CapsLock> <ESC>
 
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
 let g:airline#extensions#tabline#formatter = 'unique_tail'
 let g:airline_theme='base16'
+
+let g:ale_fixers = {
+\   'javascript': ['eslint'],
+\}
+
+let g:ale_linters = {
+\   'javascript': ['eslint'],
+\}
+
+" Tabs
+set shiftwidth=2
+set tabstop=2
+set expandtab
+set smarttab
+set autoindent
+ca tn tabnew
+autocmd FileType elixir setlocal shiftwidth=2 tabstop=2
+autocmd FileType javascript setlocal shiftwidth=2 tabstop=2
+autocmd FileType go setlocal shiftwidth=4 tabstop=4
+
+set clipboard=unnamed
+" The Silver Searcher
+if executable('ag')
+  " Use ag over grep
+  set grepprg=ag\ --nogroup\ --nocolor
+
+  " bind \ (backward slash) to grep shortcut
+  command! -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
+  nnoremap \ :Ag<SPACE>
+endif
 
