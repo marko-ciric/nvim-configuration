@@ -24,7 +24,6 @@ Plug 'easymotion/vim-easymotion'
 Plug 'majutsushi/tagbar'
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 Plug 'embear/vim-localvimrc'
-Plug 'jrosiek/vim-mark'
 Plug 'mbbill/undotree'
 Plug 'kien/rainbow_parentheses.vim'
 Plug 'airblade/vim-gitgutter'
@@ -92,6 +91,7 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'rafi/awesome-vim-colorschemes'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'ervandew/supertab'
+Plug 'scrooloose/nerdcommenter'
 
 call plug#end()
 
@@ -114,10 +114,18 @@ let NERDTreeDirArrows = 1
 let NERDTreeShowHidden = 1
 
 set number
+set showmatch 
 syntax enable
 colorscheme sierra 
 set background=dark
+set mouse=a
 syntax on
+set hlsearch
+set ignorecase
+set smartcase
+set incsearch
+set statusline=[%n]\ %F%m%r%h\ %w\ \ %=\ %c,%l\ \|\ %L 
+set laststatus=2
 
 let g:fzf_action = {
   \ 'ctrl-t': 'tab split',
@@ -154,13 +162,26 @@ let g:fzf_colors =
 " previous-history instead of down and up. If you don't like the change,
 " explicitly bind the keys to down and up in your $FZF_DEFAULT_OPTS.
 let g:fzf_history_dir = '~/.local/share/fzf-history'
-map <C-k> :call fzf#vim#ag(expand('<cword>'))<CR>
+map <C-k> :call fzf#vim#ag(expand('<cword>')) -U -G "src/*"<CR>
 map <C-g> :NERDTreeFind<CR>
 map <leader><C-g> :NERDTreeToggle<CR>
+map <leader><C-g><C-l> :NERDTreeFocus<CR>
 map <leader><C-w> :NERDTreeCWD<CR>
-map <leader><C-t> :terminal<CR>
+map <leader>t :terminal<CR>
 map <leader><C-f> :ALEFix<CR>
 map <leader><C-n> :tabnew<CR>
+map <leader>e :nohlsearch<CR>
+map <leader>p :Files<CR>
+map <leader>l :GFiles<CR>
+map <leader>g :GFiles?<CR>
+map <leader>b :Buffers<CR>
+map <leader><C-i> :Buffers<CR>
+map <leader><C-s> :w<CR>
+map <leader><C-r> :edit<CR>
+map <leader><C-x> :nohlsearch<CR>
+map <leader>w :call fzf#vim#ag(expand('<cword>'))<CR>
+map <leader>r :call fzf#vim#ag(GetSelectedText())<CR>
+let g:fzf_files_options = '--preview "(coderay {} || cat {}) 2> /dev/null | head -'.&lines.'"'
 inoremap <CapsLock> <ESC>
 
 let g:airline#extensions#tabline#enabled = 1
@@ -170,11 +191,11 @@ let g:airline#extensions#tabline#formatter = 'unique_tail'
 let g:airline_theme='base16'
 
 let g:ale_fixers = {
-\   'javascript': ['eslint'],
+\   'javascript': ['standard'],
 \}
 
 let g:ale_linters = {
-\   'javascript': ['eslint'],
+\   'javascript': ['standard'],
 \}
 
 " Tabs
@@ -196,6 +217,6 @@ if executable('ag')
 
   " bind \ (backward slash) to grep shortcut
   command! -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
-  nnoremap \ :Ag<SPACE>
+  nnoremap \] :Ag -U<SPACE>
 endif
 
