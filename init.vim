@@ -183,6 +183,7 @@ set tabstop=2
 set expandtab
 set smarttab
 set autoindent
+set rtp+=/usr/local/opt/fzf
 ca tn tabnew
 autocmd FileType elixir setlocal shiftwidth=2 tabstop=2
 autocmd FileType javascript setlocal shiftwidth=2 tabstop=2
