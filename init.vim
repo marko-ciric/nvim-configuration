@@ -108,6 +108,7 @@ let g:NERDTreeIndicatorMapCustom = {
     \ 'Ignored'   : '☒',
     \ "Unknown"   : "?"
     \ }
+let g:airline#extensions#ale#enabled = 1
 
 let NERDTreeMinimalUI = 1
 
@@ -183,6 +184,7 @@ map <leader><C-x> :nohlsearch<CR>
 
 map <leader><C-g><S-r> :GoRef<CR>
 map <leader><C-g><S-d> :GoDef<CR>
+map <leader><C-g><S-s> :GoDefPop<CR>
 map <leader><C-g><S-c> :GoCallees<CR>
 map <leader><C-g><S-e> :GoCallers<CR>
 map <leader><C-g><S-b> :GoBuild<CR>
@@ -201,11 +203,12 @@ let g:airline#extensions#tabline#formatter = 'unique_tail'
 let g:airline_theme='base16'
 
 let g:ale_fixers = {
-\   'javascript': ['standard'],
+\   'javascript': ['standard']
 \}
 
 let g:ale_linters = {
 \   'javascript': ['standard'],
+\   'go': ['gofmt'],
 \}
 
 " Tabs
