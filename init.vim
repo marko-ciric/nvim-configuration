@@ -92,6 +92,7 @@ Plug 'rafi/awesome-vim-colorschemes'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'ervandew/supertab'
 Plug 'scrooloose/nerdcommenter'
+Plug 'rust-lang/rust.vim'
 
 call plug#end()
 
@@ -113,10 +114,10 @@ let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
 let NERDTreeShowHidden = 1
 
-set number
+set nonumber
 set showmatch 
 syntax enable
-colorscheme sierra 
+colorscheme deus 
 set background=dark
 set mouse=a
 syntax on
@@ -179,6 +180,15 @@ map <leader><C-i> :Buffers<CR>
 map <leader><C-s> :w<CR>
 map <leader><C-r> :edit<CR>
 map <leader><C-x> :nohlsearch<CR>
+
+map <leader><C-g><S-r> :GoRef<CR>
+map <leader><C-g><S-d> :GoDef<CR>
+map <leader><C-g><S-c> :GoCallees<CR>
+map <leader><C-g><S-e> :GoCallers<CR>
+map <leader><C-g><S-b> :GoBuild<CR>
+map <leader><C-g><v> :GoVet<CR>
+nmap <leader><S-o> :TagbarToggle<CR>
+
 map <leader>w :call fzf#vim#ag(expand('<cword>'))<CR>
 map <leader>r :call fzf#vim#ag(GetSelectedText())<CR>
 let g:fzf_files_options = '--preview "(coderay {} || cat {}) 2> /dev/null | head -'.&lines.'"'
