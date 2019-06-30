@@ -1,8 +1,8 @@
-let g:python_host_prog='/usr/bin/python'
-let g:python3_host_prog='/usr/bin/python3'
+let g:python_host_prog='/usr/local/bin/python'
+let g:python3_host_prog='/usr/local/bin/python3'
 
 set nocompatible
-filetype off
+filetype plugin on
 
 call plug#begin("~/.nvim/bundle")
 " Plugin List
@@ -78,9 +78,7 @@ Plug 'ncm2/ncm2-path'
 Plug 'ncm2/ncm2-tmux'
 Plug 'ncm2/ncm2-bufword'
 
-Plug 'Valloric/YouCompleteMe', {'for': ['cpp', 'hpp', 'c', 'h', 'js', 'go']}
 Plug 'Shougo/echodoc.vim'
-
 Plug 'davidhalter/jedi-vim'
 
 Plug 'caio/querycommandcomplete.vim'
@@ -93,9 +91,12 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'ervandew/supertab'
 Plug 'scrooloose/nerdcommenter'
 Plug 'rust-lang/rust.vim'
+Plug 'stamblerre/gocode', { 'rtp': 'nvim', 'do': '~/.config/nvim/plugged/gocode/nvim/symlink.sh' }
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 
 call plug#end()
 
+let g:deoplete#enable_at_startup = 1
 let g:NERDTreeIndicatorMapCustom = {
     \ "Modified"  : "✹",
     \ "Staged"    : "✚",
@@ -234,3 +235,33 @@ if executable('ag')
   nnoremap \] :Ag -U<SPACE>
 endif
 
+augroup gzip
+  autocmd!
+  autocmd BufReadPre,FileReadPre	*.gz set bin
+  autocmd BufReadPost,FileReadPost	*.gz '[,']!gunzip
+  autocmd BufReadPost,FileReadPost	*.gz set nobin
+  autocmd BufReadPost,FileReadPost	*.gz execute ":doautocmd BufReadPost " . expand("%:r")
+  autocmd BufWritePost,FileWritePost	*.gz !mv <afile> <afile>:r
+  autocmd BufWritePost,FileWritePost	*.gz !gzip <afile>:r
+
+  autocmd FileAppendPre		*.gz !gunzip <afile>
+  autocmd FileAppendPre		*.gz !mv <afile>:r <afile>
+  autocmd FileAppendPost		*.gz !mv <afile> <afile>:r
+  autocmd FileAppendPost		*.gz !gzip <afile>:r
+augroup END
+
+let g:syntastic_go_checkers = ['golint', 'govet', 'gometalinter']
+let g:syntastic_go_gometalinter_args = ['--disable-all', '--enable=errcheck']
+let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
+
+set infercase
+set completeopt=longest,menuone
+
+autocmd FileType go set omnifunc=go#complete#Complete 
+autocmd FileType py set omnifunc=python3complete#Complete
+
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
