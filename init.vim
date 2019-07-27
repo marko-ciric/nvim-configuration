@@ -69,7 +69,6 @@ Plug 'tweekmonster/deoplete-clang2'
 "
 
 Plug 'roxma/ncm-clang'
-Plug 'roxma/nvim-completion-manager', {'for': ['python', 'go', 'typescript']}
 
 Plug 'ncm2/ncm2'
 Plug 'roxma/nvim-yarp'
@@ -95,6 +94,11 @@ Plug 'stamblerre/gocode', { 'rtp': 'nvim', 'do': '~/.config/nvim/plugged/gocode/
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'rainglow/vim'
 
+Plug 'phildawes/racer'
+Plug 'racer-rust/vim-racer'
+Plug 'sebastianmarkow/deoplete-rust'
+Plug 'rust-lang/rust.vim'
+
 call plug#end()
 
 let g:deoplete#enable_at_startup = 1
@@ -117,8 +121,10 @@ let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
 let NERDTreeShowHidden = 1
 
-set nonumber
+"set nonumber
+set nu
 colorscheme Iceberg 
+"colorscheme flattened_dark 
 set showmatch 
 syntax enable
 set background=dark
@@ -268,3 +274,4 @@ let g:go_highlight_methods = 1
 let g:go_highlight_structs = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
+let g:go_null_module_warning = 0
