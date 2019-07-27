@@ -93,6 +93,7 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'rust-lang/rust.vim'
 Plug 'stamblerre/gocode', { 'rtp': 'nvim', 'do': '~/.config/nvim/plugged/gocode/nvim/symlink.sh' }
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'rainglow/vim'
 
 call plug#end()
 
@@ -117,9 +118,9 @@ let NERDTreeDirArrows = 1
 let NERDTreeShowHidden = 1
 
 set nonumber
+colorscheme Iceberg 
 set showmatch 
 syntax enable
-colorscheme deus 
 set background=dark
 set mouse=a
 syntax on
@@ -129,6 +130,8 @@ set smartcase
 set incsearch
 set statusline=[%n]\ %F%m%r%h\ %w\ \ %=\ %c,%l\ \|\ %L 
 set laststatus=2
+set linespace=3
+set termguicolors
 
 let g:fzf_action = {
   \ 'ctrl-t': 'tab split',
