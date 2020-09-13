@@ -1,5 +1,5 @@
-let g:python_host_prog='/usr/local/bin/python'
-let g:python3_host_prog='/usr/local/bin/python3'
+let g:python_host_prog='/usr/bin/python'
+let g:python3_host_prog='/usr/bin/python3'
 
 set nocompatible
 filetype plugin on
@@ -121,10 +121,10 @@ let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
 let NERDTreeShowHidden = 1
 
-"set nonumber
-set nu
-colorscheme Iceberg 
-"colorscheme flattened_dark 
+set nonumber
+"set nu
+"colorscheme Iceberg 
+colorscheme apprentice 
 set showmatch 
 syntax enable
 set background=dark
