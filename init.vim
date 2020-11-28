@@ -1,4 +1,4 @@
-let g:python_host_prog='/usr/local/bin/python'
+let g:python_host_prog='/usr/bin/python'
 let g:python3_host_prog='/usr/local/bin/python3'
 
 set nocompatible
@@ -54,19 +54,12 @@ Plug 'leafgarland/typescript-vim'
 Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
 
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'autozimu/LanguageClient-neovim', {
     \ 'branch': 'next',
     \ 'do': 'bash install.sh',
     \ }
 Plug 'prabirshrestha/async.vim'
 " Plug 'prabirshrestha/vim-lsp'
-
-Plug 'zchee/deoplete-jedi'
-Plug 'zchee/deoplete-go', { 'do': 'make'}
-Plug 'zchee/deoplete-clang'
-Plug 'tweekmonster/deoplete-clang2'
-"
 
 Plug 'roxma/ncm-clang'
 
@@ -91,18 +84,31 @@ Plug 'ervandew/supertab'
 Plug 'scrooloose/nerdcommenter'
 Plug 'rust-lang/rust.vim'
 Plug 'stamblerre/gocode', { 'rtp': 'nvim', 'do': '~/.config/nvim/plugged/gocode/nvim/symlink.sh' }
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'rainglow/vim'
 
 Plug 'phildawes/racer'
 Plug 'racer-rust/vim-racer'
-Plug 'sebastianmarkow/deoplete-rust'
 Plug 'rust-lang/rust.vim'
+
+" deoplete
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
+let g:deoplete#enable_at_startup = 1
+Plug 'sebastianmarkow/deoplete-rust'
+Plug 'zchee/deoplete-jedi'
+Plug 'zchee/deoplete-go', { 'do': 'make'}
+Plug 'zchee/deoplete-clang'
+Plug 'tweekmonster/deoplete-clang2'
 
 call plug#end()
 
-let g:deoplete#enable_at_startup = 1
-let g:NERDTreeIndicatorMapCustom = {
+
+let g:NERDTreeGitStatusIndicatorMapCustom = {
     \ "Modified"  : "✹",
     \ "Staged"    : "✚",
     \ "Untracked" : "✭",
