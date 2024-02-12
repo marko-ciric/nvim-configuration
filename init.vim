@@ -48,10 +48,9 @@ Plug 'isRuslan/vim-es6'
 Plug 'bigeagle/sieve.vim'
 Plug 'posva/vim-vue'
 Plug 'google/vim-ft-bzl'
-" Plug 'mhartington/nvim-typescript'
+Plug 'mhartington/nvim-typescript'
 Plug 'leafgarland/typescript-vim'
 
-Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
 
 Plug 'autozimu/LanguageClient-neovim', {
