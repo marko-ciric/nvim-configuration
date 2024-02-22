@@ -51,6 +51,7 @@ Plug 'google/vim-ft-bzl'
 Plug 'mhartington/nvim-typescript'
 Plug 'leafgarland/typescript-vim'
 
+Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 
 Plug 'autozimu/LanguageClient-neovim', {
