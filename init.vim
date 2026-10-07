@@ -1,125 +1,83 @@
-let g:python_host_prog='/usr/bin/python'
-let g:python3_host_prog='/usr/local/bin/python3'
+" Python 2 provider support was removed from Neovim
+let g:python3_host_prog=expand('~/.local/share/nvim/venv/bin/python')
 
 set nocompatible
 filetype plugin on
 
 call plug#begin("~/.nvim/bundle")
 " Plugin List
-Plug 'rking/ag.vim'
-Plug 'kien/ctrlp.vim'
-Plug 'Yggdroot/indentLine'
-Plug 'Valloric/MatchTagAlways'
 Plug 'jlanzarotta/bufexplorer'
-Plug 'bigeagle/molokai'
-Plug 'bling/vim-airline'
-Plug 'hkupty/nvimux'
-Plug 'scrooloose/nerdtree'
-Plug 'scrooloose/syntastic'
-Plug 'w0rp/ale'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'preservim/nerdtree'
+Plug 'preservim/nerdcommenter'
+Plug 'dense-analysis/ale'
 
-Plug 'vim-scripts/DrawIt'
-Plug 'terryma/vim-multiple-cursors'
 Plug 'easymotion/vim-easymotion'
-Plug 'majutsushi/tagbar'
+Plug 'preservim/tagbar'
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 Plug 'embear/vim-localvimrc'
 Plug 'mbbill/undotree'
-Plug 'kien/rainbow_parentheses.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'editorconfig/editorconfig-vim'
+Plug 'tpope/vim-fugitive'
+Plug 'justinmk/vim-gtfo'
+Plug 'freitass/todo.txt-vim'
+Plug 'rafi/awesome-vim-colorschemes'
 
 Plug 'mattn/emmet-vim'
-Plug 'hdima/python-syntax'
-Plug 'hynek/vim-python-pep8-indent'
-Plug 'fatih/vim-go'
-Plug 'lervag/vim-latex'
-Plug 'kchmck/vim-coffee-script'
+Plug 'Vimjas/vim-python-pep8-indent'
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'rust-lang/rust.vim'
 Plug 'cakebaker/scss-syntax.vim'
-Plug 'tpope/vim-fugitive'
-Plug 'sudar/vim-arduino-syntax'
-Plug 'zaiste/tmux.vim'
 Plug 'elzr/vim-json'
-Plug 'lepture/vim-jinja'
 Plug 'cespare/vim-toml'
-Plug 'mxw/vim-jsx'
-Plug 'groenewege/vim-less'
-Plug 'isRuslan/vim-es6'
-Plug 'bigeagle/sieve.vim'
 Plug 'posva/vim-vue'
-Plug 'google/vim-ft-bzl'
-Plug 'mhartington/nvim-typescript'
 Plug 'leafgarland/typescript-vim'
 
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 
-Plug 'autozimu/LanguageClient-neovim', {
-    \ 'branch': 'next',
-    \ 'do': 'bash install.sh',
-    \ }
-Plug 'prabirshrestha/async.vim'
-" Plug 'prabirshrestha/vim-lsp'
-
-Plug 'roxma/ncm-clang'
-
-Plug 'ncm2/ncm2'
-Plug 'roxma/nvim-yarp'
-Plug 'ncm2/ncm2-jedi'
-Plug 'ncm2/ncm2-path'
-Plug 'ncm2/ncm2-tmux'
-Plug 'ncm2/ncm2-bufword'
-
-Plug 'Shougo/echodoc.vim'
-Plug 'davidhalter/jedi-vim'
-
-Plug 'caio/querycommandcomplete.vim'
-Plug 'justinmk/vim-gtfo'
-Plug 'freitass/todo.txt-vim'
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'rafi/awesome-vim-colorschemes'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'ervandew/supertab'
-Plug 'scrooloose/nerdcommenter'
-Plug 'rust-lang/rust.vim'
-Plug 'stamblerre/gocode', { 'rtp': 'nvim', 'do': '~/.config/nvim/plugged/gocode/nvim/symlink.sh' }
-Plug 'rainglow/vim'
-
-Plug 'phildawes/racer'
-Plug 'racer-rust/vim-racer'
-Plug 'rust-lang/rust.vim'
-
-" deoplete
-if has('nvim')
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-else
-  Plug 'Shougo/deoplete.nvim'
-  Plug 'roxma/nvim-yarp'
-  Plug 'roxma/vim-hug-neovim-rpc'
-endif
-let g:deoplete#enable_at_startup = 1
-Plug 'sebastianmarkow/deoplete-rust'
-Plug 'zchee/deoplete-jedi'
-Plug 'zchee/deoplete-go', { 'do': 'make'}
-Plug 'zchee/deoplete-clang'
-Plug 'tweekmonster/deoplete-clang2'
+" Completion (blink.cmp) on top of Neovim's built-in LSP client
+Plug 'neovim/nvim-lspconfig'
+Plug 'saghen/blink.cmp', { 'tag': 'v1.*' }
 
 call plug#end()
 
+lua << EOF_LUA
+require('blink.cmp').setup({
+  keymap = { preset = 'super-tab' },
+  completion = { documentation = { auto_show = true } },
+  signature = { enabled = true },
+  sources = { default = { 'lsp', 'path', 'buffer' } },
+})
 
-let g:NERDTreeGitStatusIndicatorMapCustom = {
-    \ "Modified"  : "✹",
-    \ "Staged"    : "✚",
-    \ "Untracked" : "✭",
-    \ "Renamed"   : "➜",
-    \ "Unmerged"  : "═",
-    \ "Deleted"   : "✖",
-    \ "Dirty"     : "✗",
-    \ "Clean"     : "✔︎",
-    \ 'Ignored'   : '☒',
-    \ "Unknown"   : "?"
-    \ }
+-- vim-go installs gopls into ~/go/bin, which may not be on $PATH
+local gopls = vim.fn.exepath('gopls')
+if gopls == '' then gopls = vim.fn.expand('~/go/bin/gopls') end
+vim.lsp.config('gopls', { cmd = { gopls } })
+
+-- Enable only the language servers that are installed
+local servers = {
+  gopls = gopls,
+  pyright = 'pyright-langserver',
+  ts_ls = 'typescript-language-server',
+  rust_analyzer = 'rust-analyzer',
+  elixirls = 'elixir-ls',
+}
+for name, cmd in pairs(servers) do
+  if vim.fn.executable(cmd) == 1 then vim.lsp.enable(name) end
+end
+EOF_LUA
+
+" Diagnostics come from the built-in LSP client; keep ALE for its linters/fixers only
+let g:ale_disable_lsp = 1
+
+" UltiSnips: keep <Tab> for completion
+let g:UltiSnipsExpandTrigger = '<C-j>'
+let g:UltiSnipsJumpForwardTrigger = '<C-j>'
+let g:UltiSnipsJumpBackwardTrigger = '<C-k>'
+
 let g:airline#extensions#ale#enabled = 1
 
 let NERDTreeMinimalUI = 1
@@ -233,7 +191,7 @@ set tabstop=2
 set expandtab
 set smarttab
 set autoindent
-set rtp+=/usr/local/opt/fzf
+set rtp+=/opt/homebrew/opt/fzf
 ca tn tabnew
 autocmd FileType elixir setlocal shiftwidth=2 tabstop=2
 autocmd FileType javascript setlocal shiftwidth=2 tabstop=2
@@ -265,15 +223,8 @@ augroup gzip
   autocmd FileAppendPost		*.gz !gzip <afile>:r
 augroup END
 
-let g:syntastic_go_checkers = ['golint', 'govet', 'gometalinter']
-let g:syntastic_go_gometalinter_args = ['--disable-all', '--enable=errcheck']
-let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
-
 set infercase
 set completeopt=longest,menuone
-
-autocmd FileType go set omnifunc=go#complete#Complete 
-autocmd FileType py set omnifunc=python3complete#Complete
 
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
