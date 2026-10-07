@@ -61,7 +61,7 @@ vim.lsp.config('gopls', { cmd = { gopls } })
 local servers = {
   gopls = gopls,
   pyright = 'pyright-langserver',
-  ts_ls = 'typescript-language-server',
+  tsc = 'tsc',
   rust_analyzer = 'rust-analyzer',
   elixirls = 'elixir-ls',
 }
